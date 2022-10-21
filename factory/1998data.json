@@ -1,0 +1,9 @@
+{
+	"name": "1998data",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "dbae63f1-dc87-4ff0-bd10-4fc362193ff5",
+		"tenantId": "9932fadc-d456-46d6-93dd-6d0cc5bf25c2"
+	}
+}
