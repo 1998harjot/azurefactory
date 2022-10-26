@@ -24,7 +24,7 @@
 			"value": "https://11account.dfs.core.windows.net/"
 		},
 		"is_http_opendata_ecdc_eurapa_eu_properties_typeProperties_url": {
-			"value": "https://github.com"
+			"value": "@{linkedService().sourceBaseURL}"
 		},
 		"tr_ingestpopulation_properties_typeProperties_scope": {
 			"value": "/subscriptions/ef5d0e66-1510-457b-98a0-9ec4b3ed07dc/resourceGroups/ms1/providers/Microsoft.Storage/storageAccounts/coviddataaaccount"
