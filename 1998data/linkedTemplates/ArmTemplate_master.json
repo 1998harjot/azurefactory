@@ -1,0 +1,118 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "1998data"
+		},
+		"AzureBlobStorage1_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage1'"
+		},
+		"DataLakeStorage1_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'DataLakeStorage1'"
+		},
+		"covidblob_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'covidblob'"
+		},
+		"coviddatalake_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'coviddatalake'"
+		},
+		"DataLakeStorage1_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://11account.dfs.core.windows.net/"
+		},
+		"coviddatalake_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://11account.dfs.core.windows.net/"
+		},
+		"is_http_opendata_ecdc_eurapa_eu_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://github.com"
+		},
+		"tr_ingestpopulation_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/ef5d0e66-1510-457b-98a0-9ec4b3ed07dc/resourceGroups/ms1/providers/Microsoft.Storage/storageAccounts/coviddataaaccount"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "1998data_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"AzureBlobStorage1_connectionString": {
+						"value": "[parameters('AzureBlobStorage1_connectionString')]"
+					},
+					"DataLakeStorage1_accountKey": {
+						"value": "[parameters('DataLakeStorage1_accountKey')]"
+					},
+					"covidblob_connectionString": {
+						"value": "[parameters('covidblob_connectionString')]"
+					},
+					"coviddatalake_accountKey": {
+						"value": "[parameters('coviddatalake_accountKey')]"
+					},
+					"DataLakeStorage1_properties_typeProperties_url": {
+						"value": "[parameters('DataLakeStorage1_properties_typeProperties_url')]"
+					},
+					"coviddatalake_properties_typeProperties_url": {
+						"value": "[parameters('coviddatalake_properties_typeProperties_url')]"
+					},
+					"is_http_opendata_ecdc_eurapa_eu_properties_typeProperties_url": {
+						"value": "[parameters('is_http_opendata_ecdc_eurapa_eu_properties_typeProperties_url')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "1998data_ArmTemplate_1",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"tr_ingestpopulation_properties_typeProperties_scope": {
+						"value": "[parameters('tr_ingestpopulation_properties_typeProperties_scope')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', '1998data_ArmTemplate_0')]"
+			]
+		}
+	]
+}
